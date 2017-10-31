@@ -1,44 +1,26 @@
 import sys
 import socket
 
-debug = True
+debug = False
 
 with socket.socket(socket.AF_INET, socket.SOCK_DGRAM) as s:
     packet = bytearray()
 
-    for i in range(0, (sys.argv)):
-        print("Printing arg #%d :" % (i), end=' ')
-        print(sys.argv[i])
-
-    print(" --- ---")
     if sys.argv[2] == "+":
         operator = 4
         operator = operator & 0x000000ff
-        print("Operator is \" %s \"" % (sys.argv[2]))
     elif sys.argv[2] == "-":
         operator = 2
         operator = operator & 0x000000ff
-        print("Operator is \" %s \"" % (sys.argv[2]))
     elif sys.argv[2] == "*":
         operator = 1
         operator = operator & 0x000000ff
-        print("Operator is \" %s \"" % (sys.argv[2]))
     packet.append(operator)
 
-    intCount = int(sys.argv[3])
-    intCount += 4
-
-    for j in range(4, intCount):
-        value = int(sys.argv[j])
+    for i in range(3, len(sys.argv)):
+        value = int(sys.argv[i])
         value = value & 0x000000ff
         packet.append(value)
-
-
-
-    print(" --- Packet array and assigned values --- ")
-    for i in range(0, len(packet)):
-        print("INDEX: %d VALUE:" % (i), end=' ')
-        print(packet[i])
 
 
     #send to server

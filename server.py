@@ -4,7 +4,7 @@ import socket
 #start listening - initialize with listening on port argv[1]
 s = socket.socket(socket.AF_INET, socket.SOCK_DGRAM)
 s.bind(("", int(sys.argv[1])))
-packet, address = s.recvfrom(3)
+packet, address = s.recvfrom(4)
 
 for i in range(0, len(packet)):
     print("Packet index %d is: " % (i), end=' ')
@@ -30,15 +30,32 @@ if test_b == bit7:
     b = b - 2**8
 print("b is: %d" % b)
 
+sum = 0
 if packet[0] == 4:
-    hostInteger = a + b
+
+    for i in range(1, len(packet)):
+        if packet[i] == len(packet):
+            break
+        sum += packet[i]
+    hostInteger = sum
     print("operator received was \"+\"")
 elif packet[0] == 2:
-    hostInteger = a - b
+    for i in range(1, len(packet)):
+        if packet[i] == len(packet):
+            break
+        sum -= packet[i]
+    hostInteger = sum
     print("operator received was \"-\"")
 elif packet[0] == 1:
-    hostInteger = a * b
+    for i in range(1, len(packet)):
+        if packet[i] == len(packet):
+            break
+        sum *= packet[i]
+    hostInteger = sum
     print("operator received was \"*\"")
+
+
+
 
 packet = hostInteger.to_bytes(4, byteorder="little", signed=True)
 

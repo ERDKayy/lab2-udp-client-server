@@ -1,16 +1,16 @@
 import sys
 import socket
 
-debug = False
+debug = True
 
 with socket.socket(socket.AF_INET, socket.SOCK_DGRAM) as s:
-    packet = bytearray(3)
+    packet = bytearray()
 
-    for i in range(0, len(sys.argv)):
+    for i in range(0, (sys.argv)):
         print("Printing arg #%d :" % (i), end=' ')
         print(sys.argv[i])
 
-    print(" --- Entering if statements ---")
+    print(" --- ---")
     if sys.argv[2] == "+":
         operator = 4
         operator = operator & 0x000000ff
@@ -23,20 +23,17 @@ with socket.socket(socket.AF_INET, socket.SOCK_DGRAM) as s:
         operator = 1
         operator = operator & 0x000000ff
         print("Operator is \" %s \"" % (sys.argv[2]))
+    packet.append(operator)
 
-    packet[0] = operator
-    print(" --- Beginning masking --- ")
-    value = int(sys.argv[3])
-    value = value & 0x000000ff
-    mask = bin(value)
-    print("argv (3) value is the binary # of " + mask + " after mask...")
-    packet[1] = value
+    intCount = int(sys.argv[3])
+    intCount += 4
 
-    value = int(sys.argv[4])
-    value = value & 0x000000ff
-    mask = bin(value)
-    print("argv (4) value is the binary # of " + mask + " after mask...")
-    packet[2] = value
+    for j in range(4, intCount):
+        value = int(sys.argv[j])
+        value = value & 0x000000ff
+        packet.append(value)
+
+
 
     print(" --- Packet array and assigned values --- ")
     for i in range(0, len(packet)):

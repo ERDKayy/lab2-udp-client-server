@@ -7,13 +7,13 @@ with socket.socket(socket.AF_INET, socket.SOCK_DGRAM) as s:
     packet = bytearray()
 
     if sys.argv[2] == "+":
-        operator = 4
+        operator = 1
         operator = operator & 0x000000ff
     elif sys.argv[2] == "-":
         operator = 2
         operator = operator & 0x000000ff
     elif sys.argv[2] == "*":
-        operator = 1
+        operator = 4
         operator = operator & 0x000000ff
     packet.append(operator)
 

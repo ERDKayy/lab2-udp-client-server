@@ -14,4 +14,4 @@ Client packs arguments as pairs of 4bit integers into a byte array to be sent to
 Server: Takes a single command line argument.  
   
 #python server.py PORT#
-Server stays open waiting to receive data from the client. Then it will unpack arguments using masks and perform specified operator on each integer in sequence. Returns the sum as a 4bit integer to the client.\
+Server stays open waiting to receive data from the client. Then it will unpack arguments using masks and perform specified operator on each integer in sequence. Returns the sum as a 4bit integer to the client.

@@ -26,7 +26,7 @@ with socket.socket(socket.AF_INET, socket.SOCK_DGRAM) as s:
     packet.append(packet1)
 
 
-    if (intCount % 2 == 0):
+    if intCount % 2 == 0:
         for i in range(3, len(sys.argv), 2):
             value = int(sys.argv[i])
             value = value & 0x000000ff

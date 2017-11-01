@@ -11,11 +11,11 @@ while True:
 
 
     hostInteger = int()
-    x = packet[0]
+    operator = packet[0]
 
-    operator = x >> 4
+    operator = operator >> 4
     mask = 2**3 - 1
-    intCount = x & mask
+    intCount = operator & mask
 
     if operator == 1:
         for i in range(1, len(packet)):
